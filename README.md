@@ -63,7 +63,7 @@ Documentation : [à cette URL](https://swapi.dev/documentation).
  - Utilisation de Redux
  - Utilisation du fonctionnel et de l'immutabilité
  - Un debounce pour la recherche
- - Mise en place de CSS modules
+ - ✔️ Mise en place de CSS modules
 
 Attention, l'utilisation de [swapi-node](https://www.npmjs.com/package/swapi-node) est prohibée, car l'application est surveillée par l'empire. <br/>
 
