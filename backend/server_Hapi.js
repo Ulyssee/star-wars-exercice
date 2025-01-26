@@ -1,10 +1,5 @@
-// Nouveau server avec Hapi
-
 const Hapi = require('@hapi/hapi');
-const axios = require('axios');
-
-const VALID_USER = 'Luke';
-const VALID_PASS = 'DadSucks';
+const axios = require('axios'); // Import Axios
 
 const init = async () => {
   const server = Hapi.server({
@@ -12,63 +7,79 @@ const init = async () => {
     host: 'localhost',
     routes: {
       cors: {
-        origin: ['*'],
+        origin: ['*'], // Autorise toutes les origines
+        headers: ['Accept', 'Content-Type', 'Authorization', 'username', 'password'], // Headers autorisés
       },
     },
   });
 
+  // Route de login
   server.route({
     method: 'POST',
     path: '/login',
     handler: (request, h) => {
       const { username, password } = request.payload;
-      if (username === VALID_USER && password === VALID_PASS) {
-        return { authenticated: true };
+
+      // Vérifier les identifiants
+      if (username === 'Luke' && password === 'DadSucks') {
+        return h.response({ authenticated: true }).code(200);
       } else {
         return h.response({ authenticated: false }).code(401);
       }
     },
   });
 
+  // Route de recherche
   server.route({
     method: 'GET',
     path: '/search',
     handler: async (request, h) => {
       const { username, password } = request.headers;
-      if (username !== VALID_USER || password !== VALID_PASS) {
+      const { query } = request.query;
+
+      // Vérification des credentials
+      if (username !== 'Luke' || password !== 'DadSucks') {
         return h.response({ error: 'Unauthorized' }).code(401);
       }
 
-      const { query } = request.query;
+      // Vérification du paramètre query
       if (!query) {
         return h.response({ error: 'Query parameter is required' }).code(400);
       }
 
+      const categories = ['people', 'planets', 'films', 'starships', 'vehicles', 'species'];
+
       try {
-        const categories = [
-          'people',
-          'planets',
-          'starships',
-          'vehicles',
-          'species',
-          'films',
-        ];
+        console.log(`Recherche pour query: ${query}`);
         const results = await Promise.all(
           categories.map(async (category) => {
-            const response = await axios.get(`https://swapi.dev/api/${category}/?search=${query}`);
-            return { category, results: response.data.results };
+            try {
+              const response = await axios.get(`https://swapi.dev/api/${category}/?search=${query}`);
+              console.log(`Résultats pour ${category}:`, response.data.results);
+              return { category, results: response.data.results };
+            } catch (error) {
+              console.error(`Erreur pour la catégorie ${category}:`, error.message);
+              return { category, results: [] };
+            }
           })
         );
-        return { query, results };
-      } catch (error) {
-        console.error(error);
+
+        // Transforme les résultats en un objet clé-valeur
+        const formattedResults = results.reduce((acc, { category, results }) => {
+          acc[category] = results || [];
+          return acc;
+        }, {});
+
+        return { query, results: formattedResults };
+      } catch (err) {
+        console.error('Erreur dans la route /search:', err.message);
         return h.response({ error: 'Failed to fetch data from SWAPI' }).code(500);
       }
     },
   });
 
   await server.start();
-  console.log('HAPI Server running on %s', server.info.uri);
+  console.log(`Hapi server running on ${server.info.uri}`);
 };
 
 init();

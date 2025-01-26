@@ -2,29 +2,35 @@ import React from 'react';
 import './ResultsList.scss';
 
 const ResultsList = ({ results, onItemClick, activeCategories }) => {
+  if (!results || Object.keys(results).length === 0) {
+    return <p>Aucun résultat trouvé.</p>;
+  }
+
   return (
     <div className="results-list">
       <h2>Résultats :</h2>
-      <ul>
-        {Object.entries(results).map(([category, items]) => {
-          if (!activeCategories[category]) return null;
+      {Object.entries(results).map(([category, items]) => {
+        if (!activeCategories[category]) return null; // Ignore les catégories désactivées
 
-          return (
-            <li key={category}>
-              <h3>{category.toUpperCase()}</h3>
+        return (
+          <div key={category} className="category-section">
+            <h3>{category.toUpperCase()}</h3>
+            {items.length > 0 ? (
               <ul>
-                {items.map((item, idx) => (
-                  <li key={idx}>
+                {items.map((item) => (
+                  <li key={item.url}>
                     <button onClick={() => onItemClick(item, category)}>
                       {item.name || item.title || 'Unnamed'}
                     </button>
                   </li>
                 ))}
               </ul>
-            </li>
-          );
-        })}
-      </ul>
+            ) : (
+              <p>Aucun résultat pour cette catégorie.</p>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 };

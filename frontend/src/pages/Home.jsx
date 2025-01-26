@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import SearchBar from '../components/SearchBar/SearchBar';
 import ResultsList from '../components/ResultsList/ResultsList';
 import FilterBar from '../components/FilterBar/FilterBar';
 
 const Home = () => {
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState(null);
+  const { credentials } = useAuth();
+  const navigate = useNavigate();
+  const [results, setResults] = useState(null); // Stocke les résultats de l'API
+  const [error, setError] = useState(null); // Stocke les erreurs éventuelles
   const [activeCategories, setActiveCategories] = useState({
     people: true,
     planets: true,
@@ -15,21 +19,38 @@ const Home = () => {
     species: true,
     films: true,
   });
-  const navigate = useNavigate();
-
 
   const handleSearch = async () => {
     if (!query) {
       alert('Veuillez entrer un terme de recherche.');
       return;
     }
+
+    setError(null); // Réinitialise les erreurs
+    setResults(null); // Réinitialise les résultats
+
     try {
-      const res = await fetch(`http://localhost:3000/search?query=${query}`);
-      //Si vous voulez faire un test sur l'API Node : mettre le port 3001 et lancer le serveur_Node.js
-      const data = await res.json();
-      setResults(data.results);
-    } catch (error) {
-      console.error('Erreur lors de la recherche :', error);
+      const res = await fetch(`http://localhost:3000/search?query=${query}`, {
+        method: 'GET',
+        headers: {
+          username: credentials.username,
+          password: credentials.password,
+        },
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+
+        // Stocke directement les résultats dans le state
+        setResults(data.results);
+        console.log('Résultats enregistrés dans le state:', data.results); // Debug
+      } else {
+        const errorData = await res.json();
+        setError(errorData.error || 'Erreur lors de la recherche.');
+      }
+    } catch (err) {
+      console.error('Erreur lors de la recherche :', err);
+      setError('Une erreur est survenue. Veuillez réessayer plus tard.');
     }
   };
 
@@ -37,8 +58,8 @@ const Home = () => {
     if (!item.url) {
       return;
     }
-    const parts = item.url.split('/').filter(Boolean); 
-    const id = parts[parts.length - 1];               
+    const parts = item.url.split('/').filter(Boolean);
+    const id = parts[parts.length - 1];
 
     navigate(`/detail/${category}/${id}`);
   };
@@ -49,28 +70,29 @@ const Home = () => {
       [cat]: !prev[cat],
     }));
   };
-  
+
   return (
     <div style={{ textAlign: 'center', padding: '20px' }}>
       <h1>Star Wars Rebels Alliance Search System</h1>
 
-      <SearchBar
-        query={query}
-        setQuery={setQuery}
-        onSearch={handleSearch}
-      />
+      {/* Barre de recherche */}
+      <SearchBar query={query} setQuery={setQuery} onSearch={handleSearch} />
 
-      <FilterBar
-        activeCategories={activeCategories}
-        toggleCategory={toggleCategory}
-      />
+      {/* Barre de filtre */}
+      <FilterBar activeCategories={activeCategories} toggleCategory={toggleCategory} />
 
-      {results && (
+      {/* Affichage des erreurs */}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+
+      {/* Affichage des résultats */}
+      {results && Object.keys(results).length > 0 ? (
         <ResultsList
           results={results}
           onItemClick={handleItemClick}
           activeCategories={activeCategories}
         />
+      ) : (
+        !error && <p>Aucun résultat pour cette recherche.</p>
       )}
     </div>
   );

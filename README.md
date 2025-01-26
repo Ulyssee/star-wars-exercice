@@ -20,6 +20,10 @@ Invoke-RestMethod -Method GET -Uri "http://localhost:3000/search?query=Luke" `
     password='DadSucks'
   }
 
+# Identifiant de /login :
+
+  - NDC : Luke 
+  - MDP : DadSucks
 
 # Sujet : 
 
@@ -71,7 +75,7 @@ Documentation : [à cette URL](https://swapi.dev/documentation).
    - ✔️ Il peut permettre d'accèder directement au résultat d'une recherche
  - ✔️ Implémentation d'un système de filtre
    - ✔️ Mettre en place un système de filtre par type de donnée (personnage, vaisseau, ...)
- - Mise en place d'un système d'authentification avec l'API
+ - ✔️ Mise en place d'un système d'authentification avec l'API
  - Utilisation de Redux
  - Utilisation du fonctionnel et de l'immutabilité
  - Un debounce pour la recherche
