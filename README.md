@@ -1,6 +1,7 @@
 # Projet : 
-### Lancer le projet
+### Lancer le projet :
 
+  - A la racine faire ces commandes : 
   - npm run install:all
   - npm start
 
