@@ -1,3 +1,28 @@
+# Projet : 
+### Lancer le projet
+
+  - cd backend
+  - npm install
+  - node server_Node.js ou node server_Hapi.js
+  - cd frontend
+  - npm install 
+  - npm run dev
+
+# Test de /login
+Invoke-RestMethod -Method POST -Uri "http://localhost:3000/login" `
+  -Body '{"username":"Luke","password":"DadSucks"}' `
+  -ContentType "application/json"
+
+# Test de /search
+Invoke-RestMethod -Method GET -Uri "http://localhost:3000/search?query=Luke" `
+  -Headers @{
+    username='Luke';
+    password='DadSucks'
+  }
+
+
+# Sujet : 
+
 # Star Wars Rebels Alliance Search System
 Bienvenue dans l'Alliance Rebelle jeune Padawan!<br/>
 Nous avons besoin de personnes motivées pour défaire l'Empire.
@@ -12,38 +37,40 @@ L'un de nos espions a donné sa vie afin que nous puissions accéder à ces info
  
 La base de données de l'Empire est accessible [à cette URL](https://swapi.dev/).
 
+Documentation : [à cette URL](https://swapi.dev/documentation).
+
 ## Objectifs de mission
 
 ### Etape 1
 
 #### Obligatoire
- - Création d'un back-end en Node permettant de récupérer les données de SWAPI <br />
-   - Implémentation d'un endpoint recherchant sur toutes les catégories (types) en même temps.
-   - L'API devra s'adapter aux besoins de la deuxième étape.
+ - ✔️ Création d'un back-end en Node permettant de récupérer les données de SWAPI <br /> 
+   - ✔️ Implémentation d'un endpoint recherchant sur toutes les catégories (types) en même temps.
+   - ✔️ L'API devra s'adapter aux besoins de la deuxième étape.
 
 
 #### Optionnel
- - Système d'authentification qui doit vérifier
-    - l'utilisateur: `Luke`
-    - password: `DadSucks`
- - L'utilisation d'[HAPI](https://hapi.dev/) car les développeur de la rébellion l'apprécie.
+ - ✔️ Système d'authentification qui doit vérifier
+    - ✔️ l'utilisateur: `Luke`
+    - ✔️ password: `DadSucks`
+ - ✔️ L'utilisation d'[HAPI](https://hapi.dev/) car les développeur de la rébellion l'apprécie.
 
 
 ### Etape 2
 #### Obligatoire
- - Création d'un front-end en ReactJS permettant de rechercher facilement sur le back-end créé au préalable. <br/>
-   - Création d'un champ de recherche
-   - Création d'un affichage par liste des résultats avec le nom
-   - Création d'une fiche détaillant le résultat où sera présentée les informations de base
+ - ✔️ Création d'un front-end en ReactJS permettant de rechercher facilement sur le back-end créé au préalable. <br/>
+   - ✔️ Création d'un champ de recherche
+   - ✔️ Création d'un affichage par liste des résultats avec le nom
+   - ✔️ Création d'une fiche détaillant le résultat où sera présentée les informations de base
 
 #### Optionnel
- - Faire des fiches ultra détaillées
-   - Afficher des fiches differentes en fonction du type de donnée
- - Implémentation d'un router
-   - Le router doit permettre d'accèder à n'importe quelle fiche
-   - Il peut permettre d'accèder directement au résultat d'une recherche
- - Implémentation d'un système de filtre
-   - Mettre en place un système de filtre par type de donnée (personnage, vaisseau, ...)
+ - ✔️ Faire des fiches ultra détaillées
+   - ✔️ Afficher des fiches differentes en fonction du type de donnée
+ - ✔️ Implémentation d'un router
+   - ✔️ Le router doit permettre d'accèder à n'importe quelle fiche
+   - ✔️ Il peut permettre d'accèder directement au résultat d'une recherche
+ - ✔️ Implémentation d'un système de filtre
+   - ✔️ Mettre en place un système de filtre par type de donnée (personnage, vaisseau, ...)
  - Mise en place d'un système d'authentification avec l'API
  - Utilisation de Redux
  - Utilisation du fonctionnel et de l'immutabilité

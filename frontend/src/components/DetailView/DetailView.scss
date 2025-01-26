@@ -1,0 +1,42 @@
+.detail-view {
+    background-color: #282c34;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    width: 80%;
+    margin: 20px auto;
+    color: #61dafb;
+    text-align: left;
+  
+    h2 {
+      margin-bottom: 10px;
+    }
+  
+    .info-block {
+      margin-top: 10px;
+  
+      h3 {
+        margin-bottom: 5px;
+      }
+  
+      ul {
+        padding-left: 20px;
+        list-style-type: disc;
+      }
+    }
+  
+    .back-button {
+      margin-top: 20px;
+      padding: 8px 16px;
+      border-radius: 4px;
+      background-color: #61dafb;
+      border: none;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: #4caf50;
+        color: #fff;
+      }
+    }
+  }
+  
