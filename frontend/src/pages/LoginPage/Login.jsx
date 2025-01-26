@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import './Login.scss'; // Ajout du fichier de styles
+import './Login.scss';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -14,6 +14,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await fetch('http://localhost:3000/login', {
+        //Si vous voulez test pour le server Node, modifier le port en 3001
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),

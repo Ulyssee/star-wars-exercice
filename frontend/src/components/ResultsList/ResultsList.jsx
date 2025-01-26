@@ -10,7 +10,7 @@ const ResultsList = ({ results, onItemClick, activeCategories }) => {
     <div className="results-list">
       <h2>Résultats :</h2>
       {Object.entries(results).map(([category, items]) => {
-        if (!activeCategories[category]) return null; // Ignore les catégories désactivées
+        if (!activeCategories[category]) return null; 
 
         return (
           <div key={category} className="category-section">

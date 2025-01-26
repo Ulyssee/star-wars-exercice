@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import DetailView from '../../components/DetailView/DetailView';
 import { fetchResource, fetchMultipleResources } from '../../utils/fetchSWAPI';
-import './Detail.scss'; // Pour styliser la page si nécessaire
+import './Detail.scss';
 
 const Detail = () => {
   const { category, id } = useParams();
   const navigate = useNavigate();
   const [item, setItem] = useState(null);
-  const [loading, setLoading] = useState(true); // État pour gérer le chargement
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadItem = async () => {
@@ -18,7 +18,6 @@ const Detail = () => {
 
         let detailedItem = { ...data };
 
-        // Ajout des relations si elles existent
         if (data.homeworld) {
           const homeworldData = await fetchResource(data.homeworld);
           detailedItem.homeworldObject = homeworldData;
@@ -75,7 +74,7 @@ const Detail = () => {
     return (
       <div className="loading-container">
         <img
-          src="/assets/looks_wa.gif" // Chemin vers ton GIF
+          src="/assets/looks_wa.gif" 
           alt="Chargement des détails..."
           className="loading-gif"
         />

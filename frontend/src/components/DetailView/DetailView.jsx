@@ -186,7 +186,7 @@ const DetailView = ({ item, type, onBack }) => {
             <p><strong>Nbr du personnel :</strong> {item.crew}</p>
           </div>
           <div>
-            <p><strong>Nbr de passengers :</strong> {item.passengers}</p>
+            <p><strong>Nbr de passagers :</strong> {item.passengers}</p>
             <p><strong>Vitesse Max :</strong> {item.max_atmosphering_speed }</p>
             <p><strong>Son classement hyperdrive :</strong> {item.hyperdrive_rating }</p>
             <p><strong>Maximum Nbr de MGLT :</strong> {item.MGLT}</p>
@@ -224,7 +224,7 @@ const DetailView = ({ item, type, onBack }) => {
             </div>
             <div>
               <p><strong>Nbr du personnel :</strong> {item.crew}</p>
-              <p><strong>Nbr de passengers :</strong> {item.passengers}</p>
+              <p><strong>Nbr de passagers :</strong> {item.passengers}</p>
               <p><strong>Vitesse Max :</strong> {item.max_atmosphering_speed }</p>
               <p><strong>Cargo capacity :</strong> {item.cargo_capacity}</p>
               <p><strong>Consumables :</strong> {item.consumables}</p>

@@ -11,9 +11,9 @@ const Home = () => {
   const [query, setQuery] = useState('');
   const { credentials } = useAuth();
   const navigate = useNavigate();
-  const [results, setResults] = useState(null); // Stocke les résultats de l'API
-  const [error, setError] = useState(null); // Stocke les erreurs éventuelles
-  const [loading, setLoading] = useState(false); // État pour gérer le GIF de chargement
+  const [results, setResults] = useState(null); 
+  const [error, setError] = useState(null); 
+  const [loading, setLoading] = useState(false); 
   const [activeCategories, setActiveCategories] = useState({
     people: true,
     planets: true,
@@ -29,15 +29,16 @@ const Home = () => {
       return;
     }
 
-    setError(null); // Réinitialise les erreurs
-    setResults(null); // Réinitialise les résultats
-    setLoading(true); // Active le chargement
+    setError(null); 
+    setResults(null); 
+    setLoading(true);
 
-    const MIN_LOADING_TIME = 3000; // Durée minimale en millisecondes (par exemple 3 secondes)
-    const startTime = Date.now(); // Capture le moment du début
+    const MIN_LOADING_TIME = 3000; 
+    const startTime = Date.now(); 
 
     try {
       const res = await fetch(`http://localhost:3000/search?query=${query}`, {
+        //Si vous voulez test pour le server Node, modifier le port en 3001
         method: 'GET',
         headers: {
           username: credentials.username,
@@ -49,7 +50,6 @@ const Home = () => {
         const data = await res.json();
         setResults(data.results);
 
-        // Calcule le temps écoulé et attend si nécessaire
         const elapsedTime = Date.now() - startTime;
         const remainingTime = MIN_LOADING_TIME - elapsedTime;
 
@@ -105,10 +105,10 @@ const Home = () => {
 
       {error && <p className="error-message">{error}</p>}
 
-      {loading ? ( // Affiche le GIF si l'état loading est activé
+      {loading ? ( 
         <div className="loading-container">
           <img
-            src="/assets/Stars_Wars.gif" // Place ton GIF dans `public/assets`
+            src="/assets/Stars_Wars.gif" 
             alt="Chargement..."
             className="loading-gif"
           />

@@ -1,5 +1,5 @@
 const Hapi = require('@hapi/hapi');
-const axios = require('axios'); // Import Axios
+const axios = require('axios'); 
 
 const init = async () => {
   const server = Hapi.server({
@@ -7,20 +7,19 @@ const init = async () => {
     host: 'localhost',
     routes: {
       cors: {
-        origin: ['*'], // Autorise toutes les origines
-        headers: ['Accept', 'Content-Type', 'Authorization', 'username', 'password'], // Headers autorisés
+        origin: ['*'], 
+        headers: ['Accept', 'Content-Type', 'Authorization', 'username', 'password'], 
       },
     },
   });
 
-  // Route de login
+
   server.route({
     method: 'POST',
     path: '/login',
     handler: (request, h) => {
       const { username, password } = request.payload;
 
-      // Vérifier les identifiants
       if (username === 'Luke' && password === 'DadSucks') {
         return h.response({ authenticated: true }).code(200);
       } else {
@@ -29,7 +28,6 @@ const init = async () => {
     },
   });
 
-  // Route de recherche
   server.route({
     method: 'GET',
     path: '/search',
@@ -37,12 +35,10 @@ const init = async () => {
       const { username, password } = request.headers;
       const { query } = request.query;
 
-      // Vérification des credentials
       if (username !== 'Luke' || password !== 'DadSucks') {
         return h.response({ error: 'Unauthorized' }).code(401);
       }
 
-      // Vérification du paramètre query
       if (!query) {
         return h.response({ error: 'Query parameter is required' }).code(400);
       }
@@ -50,12 +46,10 @@ const init = async () => {
       const categories = ['people', 'planets', 'films', 'starships', 'vehicles', 'species'];
 
       try {
-        console.log(`Recherche pour query: ${query}`);
         const results = await Promise.all(
           categories.map(async (category) => {
             try {
               const response = await axios.get(`https://swapi.dev/api/${category}/?search=${query}`);
-              console.log(`Résultats pour ${category}:`, response.data.results);
               return { category, results: response.data.results };
             } catch (error) {
               console.error(`Erreur pour la catégorie ${category}:`, error.message);
@@ -64,7 +58,6 @@ const init = async () => {
           })
         );
 
-        // Transforme les résultats en un objet clé-valeur
         const formattedResults = results.reduce((acc, { category, results }) => {
           acc[category] = results || [];
           return acc;

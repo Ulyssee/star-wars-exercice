@@ -4,7 +4,7 @@
 
   .home-title {
     font-size: 2.5rem;
-    color: #ffe81f; /* Jaune Star Wars */
+    color: #ffe81f; 
     margin-bottom: 1rem;
   }
 
@@ -25,20 +25,17 @@
     font-size: 1rem;
   }
 
-  /* Style pour le conteneur du GIF de chargement */
   .loading-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 600px; /* Ajuste la hauteur du conteneur si nécessaire */
+    height: 600px; 
   }
-
-  /* Style pour le GIF */
   .loading-gif {
-    width: 1000px; /* Augmente la largeur pour un GIF plus grand */
-    height: auto; /* Maintient les proportions du GIF */
-    max-width: 100%; /* Empêche de dépasser la largeur de l'écran */
-    border-radius: 10px; /* Ajoute un léger arrondi aux bords */
+    width: 1000px;
+    height: auto; 
+    max-width: 100%; 
+    border-radius: 10px; 
   }
 
 }

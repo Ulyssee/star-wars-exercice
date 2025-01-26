@@ -2,21 +2,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; // Le GIF prend tout l'écran pendant le chargement
-    background-color: #000; // Fond noir pour imiter l'espace
+    height: 100vh; 
+    background-color: #000; 
   }
   
   .loading-gif {
     width: 100%;
-    max-width: 80%; // Ajuste la taille du GIF à l'écran
+    max-width: 80%; 
     border-radius: 10px;
   }
 
-/* Détails */
 .detail-view {
   padding: 20px;
   color: #ffe81f;
-  background-color: #000; /* Fond noir */
+  background-color: #000; 
   text-align: center;
 }
 
