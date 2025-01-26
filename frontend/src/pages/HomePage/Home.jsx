@@ -88,9 +88,9 @@ const Home = () => {
 
   return (
     <div className="home">
-      <h1 className="home-title">Système de Recherche de l'Alliance Rebelle</h1>
+      <h1 className="home-title">Système de Recherche de la Résistance</h1>
       <p className="home-subtitle">Rechercher des personnages, des planètes, des vaisseaux et plus encore...</p>
-      <p className='home-subtitle'>Que la force soit avec toi !</p>
+      <p className='home-subtitle'>Que la force soit avec la resistance !</p>
 
       <SearchBar 
         query={query} 

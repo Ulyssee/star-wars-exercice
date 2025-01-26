@@ -1,0 +1,20 @@
+{
+  "name": "react-exercice",
+  "version": "1.0.0",
+  "description": "- cd backend\r   - npm install\r   - node server_Hapi.js\r   - cd frontend\r   - npm install \r   - npm run dev",
+  "main": "index.js",
+  "scripts": {
+    "install:backend": "npm install --prefix backend",
+    "install:frontend": "npm install --prefix frontend",
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "start:backend": "npm run start --prefix backend", 
+    "start:frontend": "npm run dev --prefix frontend",
+    "start": "npm run install:all && concurrently \"npm run start:backend\" \"npm run start:frontend\"" 
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

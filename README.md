@@ -1,24 +1,8 @@
 # Projet : 
 ### Lancer le projet
 
-  - cd backend
-  - npm install
-  - node server_Node.js ou node server_Hapi.js
-  - cd frontend
-  - npm install 
-  - npm run dev
-
-# Test de /login
-Invoke-RestMethod -Method POST -Uri "http://localhost:3000/login" `
-  -Body '{"username":"Luke","password":"DadSucks"}' `
-  -ContentType "application/json"
-
-# Test de /search
-Invoke-RestMethod -Method GET -Uri "http://localhost:3000/search?query=Luke" `
-  -Headers @{
-    username='Luke';
-    password='DadSucks'
-  }
+  - npm run install:all
+  - npm start
 
 # Identifiant de /login :
 

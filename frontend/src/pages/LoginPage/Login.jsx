@@ -33,7 +33,7 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <h1 className="login-title">Connexion à l'Alliance Rebelle</h1>
+      <h1 className="login-title">Connexion à la Résistance</h1>
       <form className="login-form" onSubmit={handleLogin}>
         <div className="form-group">
           <input

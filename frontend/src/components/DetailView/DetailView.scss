@@ -106,4 +106,53 @@
   li {
     margin-bottom: 5px;
   }
+
+  .character-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Ajuste la largeur minimale */
+    gap: 15px; /* Espacement entre les colonnes et les lignes */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .character-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ffe81f;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .opening-crawl {
+    position: relative;
+    width: 100%; /* S'adapte à la largeur de son conteneur */
+    height: 200px; /* Hauteur de la zone visible */
+    overflow: hidden; /* Cache le contenu qui dépasse */
+  
+    .crawl-content {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      color: #ffe81f; /* Couleur jaune Star Wars */
+      font-style: italic;
+      font-size: 1.2rem;
+      line-height: 2rem;
+      white-space: pre-line; /* Conserve les retours à la ligne dans le texte */
+      animation: scrollUp 15s linear infinite; /* Animation de défilement */
+    }
+  }
+  
+  /* Animation de défilement */
+  @keyframes scrollUp {
+    0% {
+      transform: translateY(100%); /* Commence en bas */
+    }
+    100% {
+      transform: translateY(-100%); /* Termine en haut */
+    }
+  }
+  
+  
 }

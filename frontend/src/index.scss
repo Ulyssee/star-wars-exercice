@@ -64,3 +64,32 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+.music-control {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+/* Bouton de contrôle de la musique */
+.music-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffe81f; /* Jaune Star Wars */
+  background-color: black; /* Fond noir */
+  border: 2px solid #ffe81f; /* Bordure jaune */
+  border-radius: 10px; /* Coins arrondis */
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Ombre pour un effet de profondeur */
+  transition: transform 0.2s ease, background-color 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    background-color: #333;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
