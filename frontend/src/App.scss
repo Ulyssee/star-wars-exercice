@@ -1,9 +1,18 @@
 .app-container {
-    text-align: center;
-    padding: 20px;
-    background-color: #20232a;
-    color: #61dafb;
+    font-family: 'Star Jedi', sans-serif; // Mets une alternative si Star Jedi n'est pas dispo
+    background-color: #000; // Fond noir
+    color: #ffe81f; // Texte jaune doré
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  h1 {
+    text-align: center;
+    font-size: 3rem;
+    text-transform: uppercase;
+    margin: 0 0 2rem 0;
   }
   
   .search-bar {
@@ -83,4 +92,3 @@
       margin: 5px 0;
     }
   }
-  

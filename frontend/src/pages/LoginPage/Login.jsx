@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
+import './Login.scss'; // Ajout du fichier de styles
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -13,7 +14,6 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await fetch('http://localhost:3000/login', {
-        // Si vous voulez tester avec l'api Node, modifier le port en 3001
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -21,7 +21,7 @@ const Login = () => {
 
       if (response.ok) {
         login(username, password);
-        navigate('/'); 
+        navigate('/');
       } else {
         setError('Identifiants invalides');
       }
@@ -32,27 +32,29 @@ const Login = () => {
   };
 
   return (
-    <div style={{ textAlign: 'center', padding: '20px' }}>
-      <h1>Connexion</h1>
-      <form onSubmit={handleLogin}>
-        <div>
+    <div className="login-container">
+      <h1 className="login-title">Connexion à l'Alliance Rebelle</h1>
+      <form className="login-form" onSubmit={handleLogin}>
+        <div className="form-group">
           <input
             type="text"
+            className="form-input"
             placeholder="Nom d'utilisateur"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        <div>
+        <div className="form-group">
           <input
             type="password"
+            className="form-input"
             placeholder="Mot de passe"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Se connecter</button>
+        {error && <p className="login-error">{error}</p>}
+        <button type="submit" className="login-button">Se connecter</button>
       </form>
     </div>
   );

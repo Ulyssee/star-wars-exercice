@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import DetailView from '../components/DetailView/DetailView';
-import { fetchResource, fetchMultipleResources } from '../utils/fetchSWAPI';
+import DetailView from '../../components/DetailView/DetailView';
+import { fetchResource, fetchMultipleResources } from '../../utils/fetchSWAPI';
+import './Detail.scss'; // Pour styliser la page si nécessaire
 
 const Detail = () => {
-  const { category, id } = useParams(); 
+  const { category, id } = useParams();
   const navigate = useNavigate();
   const [item, setItem] = useState(null);
+  const [loading, setLoading] = useState(true); // État pour gérer le chargement
 
   useEffect(() => {
     const loadItem = async () => {
@@ -16,6 +18,7 @@ const Detail = () => {
 
         let detailedItem = { ...data };
 
+        // Ajout des relations si elles existent
         if (data.homeworld) {
           const homeworldData = await fetchResource(data.homeworld);
           detailedItem.homeworldObject = homeworldData;
@@ -56,6 +59,8 @@ const Detail = () => {
         setItem(detailedItem);
       } catch (error) {
         console.error('Erreur lors de la récupération des détails :', error);
+      } finally {
+        setTimeout(() => setLoading(false), 2000);
       }
     };
 
@@ -66,8 +71,20 @@ const Detail = () => {
     navigate('/');
   };
 
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <img
+          src="/assets/looks_wa.gif" // Chemin vers ton GIF
+          alt="Chargement des détails..."
+          className="loading-gif"
+        />
+      </div>
+    );
+  }
+
   if (!item) {
-    return <p>Chargement...</p>;
+    return <p>Erreur : Impossible de charger les détails.</p>;
   }
 
   return (
